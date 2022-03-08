@@ -1,0 +1,69 @@
+# Copyright 2019 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# Config file for Document AI patents example training and prediction pipelines.
+
+# The project the Document AI pipeline will be built and hosted in.
+# TODO(michaelsherman): Make sure no line is past 80 characters (per bash style)
+pipeline_project:
+  project_id: 'qwiklabs-gcp-01-3761bc95f8d7' # TODO(user): Set to your Project ID.
+  region: 'us-central1' # Currently (Aug 2019) only "us-central1" supported.
+  demo_sample_data: 'gs://qwiklabs-gcp-01-3761bc95f8d7/patent_sample/' # TODO(user): GCS location of sample patents to process for demo
+  demo_dataset_id: 'patent_demo' # TODO(user): BQ dataset to store information collected for demo
+  id_token: "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNkZDZjYTJhODFkYzJmZWE4YzM2NDI0MzFlN2UyOTZkMmQ3NWI0NDYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMTAzMDExNTE5NDYyMC11c2dqZDVmZmJrZWp0MzBlYmdiOXY5azR2YXExNDFxdS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImF1ZCI6IjEwMzAxMTUxOTQ2MjAtdXNnamQ1ZmZia2VqdDMwZWJnYjl2OWs0dmFxMTQxcXUuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDU2MDM3MjMyMjA0NzI0MDIxNjYiLCJoZCI6InF3aWtsYWJzLm5ldCIsImVtYWlsIjoic3R1ZGVudC0wMC05OGQ4MzZjZjAyOWJAcXdpa2xhYnMubmV0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiI0SWQ4NmtQX3djYWVUcFdHMlRZM3JRIiwibmFtZSI6InN0dWRlbnQgYmU0OGQ1NDQiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd1hRN0NsckhJQk5uMW41akM4Unh3MjcxcHQtTjBuQ1RUQ0N2a2s9czk2LWMiLCJnaXZlbl9uYW1lIjoic3R1ZGVudCIsImZhbWlseV9uYW1lIjoiYmU0OGQ1NDQiLCJsb2NhbGUiOiJlbiIsImlhdCI6MTY0Njc0MDA3NywiZXhwIjoxNjQ2NzQzNjc3LCJqdGkiOiJhN2M0NzJmNDA2MmQ1NTVmZTE5NTA2N2ZhMDAxYzcxZjZkODMzY2ZjIn0.lI8usOGUpEEC9V4E46pcz4VI5KTCoUvz8NahH12Ij0rzPwKrHSb-CU71xjdJLILy7UNHeJzOH-LQAVWKY5u1k4Vej3UkBFpBVIHHv_kKdAf0OQcVY8QEYPzOrz0YIvjSfGavPumwLTMojXBxWWIcQrYIFWju42S1JPkxpPjMHLH4FQeOrH5vt7s-Tt-hYDwxxDZwxIras8aMmrsIsRs7P4yuhEXej8s_BikUTI5lHXYo6x_FeJHbbH_XLc0EoaeUquVfocQK4YUVvd3lH-6R7cKZxJdwCls2OFfZZBLi61fjAOX9L-J3SNcARcD5Ek6rdkdyleHTLLzAtkSZBW7V_Q"
+# Parameters for creation of a service account with get_service_acct.sh.
+service_acct:
+  creator_user_id: 'student-00-98d836cf029b@qwiklabs.net' # TODO(user): Set to your GCP login email.
+  acct_name: 'patent-service-acct'
+  acct_description: 'Service-account-for-patent-demo'
+  acct_display_name: 'Patent-Demo-Service-Account'
+  key_path: '$HOME/keys/patent-demo-service-acct.json'
+
+# Parameters for creation of a service account with get_service_acct.sh.
+api:
+  api_path: # TODO(user): Set to your GCP login email.
+
+# TODO(michaelsherman): Each of these should just be a BQ proj.dataset.table, they should
+#   be as independent as possible.
+# TODO(michaelsherman): Fields should be specified for all models, like NER is.
+pdp_project:
+  project_id: 'bigquery-public-data' 
+  dataset_id: 'labeled_patents' 
+  bucket_name: 'gcs-public-data--labeled-patents'
+  image_table_id: 'extracted_data' 
+  objdetect_table_id: 'figures'
+  text_table_id: 'invention_types'
+  ner_table_id: 'extracted_data'
+model_imgclassifier:
+  model_id: 'ICN2100696129703247872' 
+  demo_table_id: 'document_classification'
+model_objdetect:
+  model_id: 'IOD3891299194048086016' 
+  demo_table_id: 'object_detection'
+model_textclassifier:
+  model_id: 'TCN8881991268616372224'
+  demo_table_id: 'subject_classification'
+model_ner:
+  model_id: 'TEN3490619564700467200'
+  demo_table_id: 'ner_results'
+  fields_to_extract:
+  - field_name: 'gcs_path'
+  - field_name: 'publication_date'
+  - field_name: 'class_international'
+  - field_name: 'application_number'
+  - field_name: 'filing_date'
+  - field_name: 'applicant_line_1'
+  - field_name: 'inventor_line_1'
+  - field_name: 'title_line_1'
+  - field_name: 'number'
+
