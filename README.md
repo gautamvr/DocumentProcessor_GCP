@@ -37,3 +37,5 @@ The  end-to-end document AI pipeline consists of two components:
 - The AutoML Entity Extraction model is called to extract predetermined entities from the patent. The extracted entities are applicant, application number, international classification, filing date, inventor, number, publication date and title. These entities are then uploaded to a BigQuery table.
 
 - Finally, the BigQuery tables above are joined to produce a final results table with all the properties above.
+
+![alt text](DocumentAIParser_Output.png)
