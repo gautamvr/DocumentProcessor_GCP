@@ -406,6 +406,8 @@ def entity_extraction(main_project_id,
   shutil.rmtree(temp_directory)
 
 
+  
+  
 def bq_to_df(project_id, dataset_id, table_id, service_acct):
   """Fetches Data From BQ Dataset, outputs as dataframe."""
 
