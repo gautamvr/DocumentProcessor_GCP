@@ -322,6 +322,7 @@ def text_classification(main_project_id,
     }
   }
 
+  
   model_metadata = {
     "display_name": output_directory + now,
     "dataset_id": None,
