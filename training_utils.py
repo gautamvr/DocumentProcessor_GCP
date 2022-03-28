@@ -211,7 +211,7 @@ def image_classification(main_project_id,
   output_df = output_df[["gcs_path", "issuer"]]
   output_df.to_csv(dest_uri, header=False, index=False)
 
-  now = datetime.datetime.now().strftime("_%m%d%Y_%H%M%S")
+  now = datetime.datetime.now().strftime("_%d%m%Y_%H%M%S")
   dataset_metadata = {
     "display_name": output_directory + now,
     "image_classification_dataset_metadata": {
@@ -264,7 +264,7 @@ def object_detection(main_project_id,
   df.insert(loc=10, column="", value="", allow_duplicates=True)
   df.to_csv(dest_uri, header=False, index=False)
 
-  now = datetime.datetime.now().strftime("_%m%d%Y_%H%M%S")
+  now = datetime.datetime.now().strftime("_%d%m%Y_%H%M%S")
   dataset_metadata = {
     "display_name": output_directory + now,
     "image_object_detection_dataset_metadata": {},
@@ -314,7 +314,7 @@ def text_classification(main_project_id,
   output_df = output_df[["gcs_path", "invention_type"]]
   output_df.to_csv(dest_uri, header=False, index=False)
 
-  now = datetime.datetime.now().strftime("_%m%d%Y_%H%M%S")
+  now = datetime.datetime.now().strftime("_%d%m%Y_%H%M%S")
   dataset_metadata = {
     "display_name": output_directory + now,
     "text_classification_dataset_metadata": {
@@ -382,7 +382,7 @@ def entity_extraction(main_project_id,
                      service_acct=service_acct)
 
   # Set dataset name and metadata.
-  now = datetime.datetime.now().strftime("_%m%d%Y_%H%M%S")
+  now = datetime.datetime.now().strftime("_%d%m%Y_%H%M%S")
   dataset_metadata = {
     "display_name": output_directory + now,
     "text_extraction_dataset_metadata": {}
